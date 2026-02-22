@@ -35,6 +35,13 @@ body {
     background: white;
     border-radius: 50%;
     opacity: 0.8;
+    animation: twinkle 2s infinite alternate; /* TAMBAHAN */
+}
+
+/* ✨ Animasi kedip */
+@keyframes twinkle {
+    from { opacity: 0.2; }
+    to { opacity: 1; }
 }
 
 /* 🌠 Meteor */
@@ -159,7 +166,7 @@ setInterval(createMeteor, 3000);
 
 
 // ==============================
-// 🔥 TAMBAHAN: HUJAN METEOR 10 SEKALIGUS
+// 🔥 HUJAN METEOR 10 SEKALIGUS
 // ==============================
 
 function createMeteorShower() {
@@ -183,6 +190,33 @@ function createMeteorShower() {
 }
 
 setInterval(createMeteorShower, 5000);
+
+
+// ==============================
+// 🌌 TAMBAHAN: METEOR RANDOM EXTRA
+// ==============================
+
+function meteorRandom() {
+
+    let meteor = document.createElement("div");
+    meteor.className = "meteor";
+
+    meteor.style.top = Math.random() * 60 + "vh";
+    meteor.style.left = Math.random() * 100 + "vw";
+
+    meteor.style.height = (80 + Math.random() * 200) + "px";
+    meteor.style.animationDuration = (0.4 + Math.random() * 1.5) + "s";
+
+    document.body.appendChild(meteor);
+
+    setTimeout(() => {
+        meteor.remove();
+    }, 2500);
+
+    setTimeout(meteorRandom, Math.random() * 6000 + 1000);
+}
+
+meteorRandom();
 
 
 // 📲 WhatsApp
