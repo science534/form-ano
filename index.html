@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Astronomy Night Orion</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            background: url('https://cdn.pixabay.com/photo/2019/12/13/18/52/space-4698534_960_720.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .galaxy-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://cdn.pixabay.com/photo/2019/12/19/06/46/nebula-4705612_960_720.jpg') repeat;
+            animation: galaxyMove 60s infinite linear;
+            z-index: -1;
+        }
+
+        @keyframes galaxyMove {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            animation: formEnter 1s ease-out;
+        }
+
+        @keyframes formEnter {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            color: #f3f3f3;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-size: 18px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin: 8px 0;
+            border-radius: 10px;
+            border: 2px solid #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #f3f3f3;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            color: white;
+            background-color: #4e4e9e;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #6a6ac6;
+        }
+
+        .feedback-message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #87cefa;
+            display: none;
+        }
+
+        .status-select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 2px solid #fff;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="galaxy-animation"></div>
+
+<div class="form-container">
+    <h1>Pendaftaran Astronomy Night Orion</h1>
+    <form id="registrationForm">
+        <label for="name">Nama:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="age">Umur:</label>
+        <input type="number" id="age" name="age" required>
+
+        <label for="tiktok">Akun TikTok:</label>
+        <input type="text" id="tiktok" name="tiktok" required>
+
+        <label for="status">Pilih Status:</label>
+        <select id="status" name="status" class="status-select" required>
+            <option value="pelajar">Pelajar</option>
+            <option value="mahasiswa">Mahasiswa</option>
+            <option value="pekerja">Pekerja</option>
+            <option value="lainnya">Lainnya</option>
+        </select>
+
+        <label for="reason">Alasan Masuk ANO:</label>
+        <textarea id="reason" name="reason" rows="4" required></textarea>
+
+        <button type="submit">Daftar Sekarang</button>
+    </form>
+    <div id="feedback" class="feedback-message"></div>
+</div>
+
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Menghindari refresh halaman saat form disubmit
+
+        // Ambil data dari form
+        const name = document.getElementById('name').value;
+        const age = document.getElementById('age').value;
+        const tiktok = document.getElementById('tiktok').value;
+        const status = document.getElementById('status').value;
+        const reason = document.getElementById('reason').value;
+
+        // Membuat pesan untuk dikirim ke WhatsApp
+        const message = `*Pendaftaran Astronomy Night Orion*\n\nNama: ${name}\nUmur: ${age}\nAkun TikTok: ${tiktok}\nStatus: ${status}\nAlasan Masuk ANO: ${reason}`;
+
+        // Membuat URL WhatsApp untuk mengirim pesan
+        const whatsappUrl = `https://wa.me/082150800880?text=${encodeURIComponent(message)}`;
+
+        // Redirect pengguna ke WhatsApp untuk mengirim pesan
+        window.open(whatsappUrl, '_blank');
+    });
+</script>
+
+</body>
+  </html>
